@@ -21,9 +21,7 @@
     <link rel="preload" as="image" href="images/newBegining1.jpeg">
     <link rel="preload" as="image" href="images/newBegining2.jpeg">
     <link rel="preload" as="image" href="images/mine.jpeg">
-    <link rel="preload" as="video" href="videos/whowillbemy.mp4">
-    <link rel="preload" as="video" href="videos/love.mp4">
-    <link rel="preload" as="video" href="videos/favorite.mp4">
+    <!-- Removed video preloading to improve mobile performance - videos load on demand -->
 </head>
 <body>
     <div class="overlay" id="overlay"></div>
@@ -220,7 +218,7 @@
                         <div class="media-container">
                             <!-- <img src="images/rangjolagyo.jpeg" alt="❤️💕" class="timeline-img" onclick="openLightbox(this)"> -->
                             <div class="video-container">
-                                <video src="videos/whowillbemy.mp4" loop class="timeline-video"></video>
+                                <video src="videos/whowillbemy.mp4" loop class="timeline-video" preload="metadata" playsinline muted></video>
                                 <div class="video-play-button" onclick="playVideo(this)">▶</div>
                             </div>
                         </div>
@@ -266,7 +264,7 @@
                         <div class="media-container">
                             <!-- <img src="images/newBegining2.jpeg" alt="❤️💕" class="timeline-img" onclick="openLightbox(this)"> -->
                             <div class="video-container">
-                                <video src="videos/love.mp4" loop class="timeline-video"></video>
+                                <video src="videos/love.mp4" loop class="timeline-video" preload="metadata" playsinline muted></video>
                                 <div class="video-play-button" onclick="playVideo(this)">▶</div>
                             </div>
                         </div>
@@ -300,7 +298,7 @@
                         <div class="media-container">
                             <!-- <img src="images/mine.jpeg" alt="❤️💕" class="timeline-img" onclick="openLightbox(this)"> -->
                             <div class="video-container">
-                                <video src="videos/favorite.mp4" loop class="timeline-video"></video>
+                                <video src="videos/favorite.mp4" loop class="timeline-video" preload="metadata" playsinline muted></video>
                                 <div class="video-play-button" onclick="playVideo(this)">▶</div>
                             </div>
                         </div>
@@ -316,7 +314,7 @@
                         <p>This timeline is just the beginning... I want it to grow forever, filled with countless more beautiful moments, adventures, and memories.</p>
                         <p>As long as we're together, every day will be a new chapter in our endless story of love.</p>
                         <p class="forever-promise">May we both live happily ever after, hand in hand, heart to heart, forever and always. 💖✨</p>
-                        <h2 class="rashi-love">RASHIII, I LOVEEEEE YOUUU 💕</h2>
+                        <h2 class="rashi-love">RASHI, I LOVE YOU 💕</h2>
                         <div class="infinity-symbol">∞</div>
                     </div>
                 </div>            </div>
@@ -355,5 +353,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
