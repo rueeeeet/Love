@@ -346,7 +346,7 @@ h1 {
     border: 3px solid rgba(255, 107, 157, 0.3);
     max-width: 90vw;
     max-height: 80vh;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .popup.active {
@@ -437,10 +437,8 @@ h1 {
 @media (max-width: 768px) {
     body {
         padding: 10px;
-        animation: none;
         -webkit-tap-highlight-color: transparent;
         touch-action: pan-y;
-        background-attachment: scroll;
     }
     
     .container {
