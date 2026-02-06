@@ -595,6 +595,22 @@ h1 {
     }
 }
 
+/* Reduce visual load while videos play on mobile */
+@media (max-width: 768px) {
+    body.video-playing .heart,
+    body.video-playing .petal,
+    body.video-playing .rose,
+    body.video-playing .butterfly,
+    body.video-playing .sparkle,
+    body.video-playing .star {
+        display: none;
+    }
+
+    body.video-playing .timeline-content {
+        box-shadow: 0 6px 20px rgba(212, 20, 90, 0.2);
+    }
+}
+
 /* Journey Timeline Section */
 .journey-section {
     margin-top: 80px;

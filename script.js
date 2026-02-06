@@ -89,24 +89,41 @@ function createStar() {
 
 // Generate hearts, petals, and sparkles continuously - optimized for mobile
 const isMobile = window.innerWidth <= 768;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let animationIntervals = [];
 
-if (isMobile) {
-    // Reduce animation frequency on mobile for better performance
-    setInterval(createHeart, 600);  // Reduced from 400ms
-    setInterval(createPetal, 500);   // Reduced from 300ms
-    setInterval(createSparkle, 400); // Reduced from 200ms
-    setInterval(createRose, 3000);   // Reduced from 2000ms
-    setInterval(createButterfly, 4000); // Reduced from 2500ms
-    setInterval(createStar, 1200);    // Reduced from 800ms
-} else {
-    // Keep original frequency on desktop
-    setInterval(createHeart, 400);
-    setInterval(createPetal, 300);
-    setInterval(createSparkle, 200);
-    setInterval(createRose, 2000);
-    setInterval(createButterfly, 2500);
-    setInterval(createStar, 800);
+function startAmbientAnimations() {
+    if (reduceMotion) {
+        return;
+    }
+
+    const config = isMobile
+        ? [
+            [createHeart, 900],
+            [createPetal, 800],
+            [createSparkle, 700],
+            [createRose, 4500],
+            [createButterfly, 6000],
+            [createStar, 1600]
+        ]
+        : [
+            [createHeart, 400],
+            [createPetal, 300],
+            [createSparkle, 200],
+            [createRose, 2000],
+            [createButterfly, 2500],
+            [createStar, 800]
+        ];
+
+    animationIntervals = config.map(([fn, ms]) => setInterval(fn, ms));
 }
+
+function stopAmbientAnimations() {
+    animationIntervals.forEach((id) => clearInterval(id));
+    animationIntervals = [];
+}
+
+startAmbientAnimations();
 
 // Show popup message
 function showLoveMessage() {
@@ -287,3 +304,36 @@ function playVideo(button) {
         });
     }
 }
+
+// Reduce background effects while any video is playing on mobile
+if (isMobile) {
+    document.addEventListener('play', (event) => {
+        if (event.target && event.target.tagName === 'VIDEO') {
+            document.body.classList.add('video-playing');
+            stopAmbientAnimations();
+        }
+    }, true);
+
+    document.addEventListener('pause', (event) => {
+        if (event.target && event.target.tagName === 'VIDEO') {
+            document.body.classList.remove('video-playing');
+            startAmbientAnimations();
+        }
+    }, true);
+
+    document.addEventListener('ended', (event) => {
+        if (event.target && event.target.tagName === 'VIDEO') {
+            document.body.classList.remove('video-playing');
+            startAmbientAnimations();
+        }
+    }, true);
+}
+
+// Pause ambient animations when tab is hidden
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        stopAmbientAnimations();
+    } else if (!document.body.classList.contains('video-playing')) {
+        startAmbientAnimations();
+    }
+});
